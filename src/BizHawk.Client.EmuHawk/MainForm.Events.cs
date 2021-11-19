@@ -1663,7 +1663,7 @@ namespace BizHawk.Client.EmuHawk
 			{
 				var ss = coleco.GetSyncSettings();
 				ss.SkipBiosIntro ^= true;
-				PutCoreSyncSettings(ss);
+				PutCoreSyncSettings(ss, GetSettingsAdapterForLoadedCore<ColecoVision>());
 			}
 		}
 
@@ -1673,7 +1673,7 @@ namespace BizHawk.Client.EmuHawk
 			{
 				var ss = coleco.GetSyncSettings();
 				ss.UseSGM ^= true;
-				PutCoreSyncSettings(ss);
+				PutCoreSyncSettings(ss, GetSettingsAdapterForLoadedCore<ColecoVision>());
 			}
 		}
 

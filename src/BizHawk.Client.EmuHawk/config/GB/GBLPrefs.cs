@@ -67,7 +67,7 @@ namespace BizHawk.Client.EmuHawk
 				gambatte.PutSettings(s);
 				if (dlg.SyncSettingsChanged)
 				{
-					mainForm.PutCoreSyncSettings(ss);
+					mainForm.PutCoreSyncSettings(ss, mainForm.GetSettingsAdapterForLoadedCore<GambatteLink>());
 				}
 			}
 		}

@@ -2420,9 +2420,8 @@ namespace BizHawk.Client.EmuHawk
 		/// <summary>
 		/// send core settings to emu, setting reboot flag if needed
 		/// </summary>
-		public void PutCoreSettings(object o)
+		public void PutCoreSettings(object o, SettingsAdapter settable)
 		{
-			var settable = new SettingsAdapter(Emulator);
 			if (!settable.HasSettings)
 				return;
 			var dirty = settable.PutSettings(o);
@@ -2436,9 +2435,8 @@ namespace BizHawk.Client.EmuHawk
 		/// <summary>
 		/// send core sync settings to emu, setting reboot flag if needed
 		/// </summary>
-		public void PutCoreSyncSettings(object o)
+		public void PutCoreSyncSettings(object o, SettingsAdapter settable)
 		{
-			var settable = new SettingsAdapter(Emulator);
 			if (MovieSession.Movie.IsActive())
 			{
 				AddOnScreenMessage("Attempt to change sync-relevant settings while recording BLOCKED.");
@@ -2452,6 +2450,16 @@ namespace BizHawk.Client.EmuHawk
 					FlagNeedsReboot();
 			}
 		}
+
+		public SettingsAdapter GetSettingsAdapterForLoadedCore<T>()
+			where T : IEmulator
+		{
+			if (Emulator is not T) throw new InvalidOperationException();
+			return GetSettingsAdapterForLoadedCoreUntyped();
+		}
+
+		public SettingsAdapter GetSettingsAdapterForLoadedCoreUntyped()
+			=> new(Emulator);
 
 		private void SaveConfig(string path = "")
 		{
