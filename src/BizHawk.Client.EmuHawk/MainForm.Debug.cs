@@ -12,8 +12,11 @@ using BizHawk.Client.EmuHawk.Properties;
 using BizHawk.Common;
 using BizHawk.Emulation.Common;
 using BizHawk.Emulation.Cores;
+using BizHawk.Emulation.Cores.Consoles.Nintendo.NDS;
 using BizHawk.Emulation.Cores.Nintendo.GBA;
+using BizHawk.Emulation.Cores.Nintendo.GBHawk;
 using BizHawk.Emulation.Cores.Nintendo.N64;
+using BizHawk.Emulation.Cores.Sega.MasterSystem;
 using BizHawk.WinForms.Controls;
 
 namespace BizHawk.Client.EmuHawk
@@ -171,12 +174,29 @@ namespace BizHawk.Client.EmuHawk
 //				this.ShowDialogAsChild(form);
 //			}
 			void OpenTool<T>() where T : class, IToolForm => Tools.Load<T>();
+			ToolStripMenuItemEx CreateCoreSettingsItem<T>(string coreName)
+				where T : IEmulator
+			{
+				ToolStripMenuItemEx menuItem = new() { Text = $"Open {coreName} Settings" };
+				menuItem.Click += (_, _) => OpenGenericCoreConfigFor<T>($"{coreName} Settings");
+				return menuItem;
+			}
 			ToolStripMenuItemEx firmwareAutopatchDebugItem = new() { Text = FirmwareAutopatchDebugToolForm.TOOL_NAME };
 			firmwareAutopatchDebugItem.Click += (_, _) => OpenTool<FirmwareAutopatchDebugToolForm>();
 			ToolStripMenuItemEx debugMenu = new()
 			{
 				DropDownItems =
 				{
+					new ToolStripMenuItemEx
+					{
+						DropDownItems =
+						{
+							CreateCoreSettingsItem<GBHawk>(CoreNames.GbHawk),
+							CreateCoreSettingsItem<NDS>(CoreNames.MelonDS),
+							CreateCoreSettingsItem<SMS>(CoreNames.SMSHawk),
+						},
+						Text = "Cores",
+					},
 					new ToolStripMenuItemEx
 					{
 						DropDownItems =

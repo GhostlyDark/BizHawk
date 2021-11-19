@@ -1753,6 +1753,10 @@ namespace BizHawk.Client.EmuHawk
 			}
 		}
 
+		private void OpenGenericCoreConfigFor<T>(string title)
+			where T : IEmulator
+			=> GenericCoreConfig.DoDialogFor(this, GetSettingsAdapterFor<T>(), title, MovieSession.Movie.IsActive());
+
 		private void OpenGenericCoreConfig(string title)
 			=> GenericCoreConfig.DoDialog(Emulator, this, title, isMovieActive: MovieSession.Movie.IsActive());
 
