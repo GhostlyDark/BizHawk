@@ -17,15 +17,21 @@ namespace BizHawk.Client.EmuHawk
 			Icon = Properties.Resources.GambatteIcon;
 		}
 
-		public static void DoGBPrefsDialog(IMainFormForConfig mainForm, Config config, IGameInfo game, IMovieSession movieSession, Gameboy gb)
+		public static void DoGBPrefsDialog(
+			Config config,
+			IDialogParent dialogParent,
+			IGameInfo game,
+			IMainFormForConfig mainForm,
+			IMovieSession movieSession,
+			Gameboy gb)
 		{
 			var s = gb.GetSettings();
 			var ss = gb.GetSyncSettings();
 
-			using var dlg = new GBPrefs(mainForm.DialogController);
+			using var dlg = new GBPrefs(dialogParent.DialogController);
 			dlg.gbPrefControl1.PutSettings(config, game, movieSession, s, ss);
 			dlg.gbPrefControl1.ColorGameBoy = gb.IsCGBMode() || gb.IsSgb;
-			if (mainForm.ShowDialogAsChild(dlg).IsOk())
+			if (dialogParent.ShowDialogAsChild(dlg).IsOk())
 			{
 				dlg.gbPrefControl1.GetSettings(out s, out ss);
 				gb.PutSettings(s);
