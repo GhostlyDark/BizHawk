@@ -41,7 +41,7 @@ using BizHawk.Client.EmuHawk.CustomControls;
 
 namespace BizHawk.Client.EmuHawk
 {
-	public partial class MainForm : FormBase, IDialogParent, IMainFormForApi, IMainFormForConfig, IMainFormForTools
+	public partial class MainForm : FormBase, IDialogParent, IMainFormForApi, IMainFormForTools
 	{
 		private void MainForm_Load(object sender, EventArgs e)
 		{
