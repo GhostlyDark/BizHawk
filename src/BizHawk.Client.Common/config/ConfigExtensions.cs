@@ -73,18 +73,6 @@ namespace BizHawk.Client.Common
 		}
 
 		/// <summary>
-		/// saves the core settings for a core
-		/// </summary>
-		/// <param name="config"></param>
-		/// <param name="o">null to remove settings for that core instead</param>
-		/// <typeparam name="TCore"></typeparam>
-		public static void PutCoreSettings<TCore>(this Config config, object o)
-			where TCore : IEmulator
-		{
-			config.PutCoreSettings(o, typeof(TCore));
-		}
-
-		/// <summary>
 		/// Returns the core syncsettings for a core
 		/// </summary>
 		/// <param name="config"></param>
@@ -122,18 +110,6 @@ namespace BizHawk.Client.Common
 			{
 				config.CoreSyncSettings.Remove(coreType.ToString());
 			}
-		}
-
-		/// <summary>
-		/// saves the core syncsettings for a core
-		/// </summary>
-		/// <param name="config"></param>
-		/// <param name="o">null to remove settings for that core instead</param>
-		/// <typeparam name="TCore"></typeparam>
-		public static void PutCoreSyncSettings<TCore>(this Config config, object o)
-			where TCore : IEmulator
-		{
-			config.PutCoreSyncSettings(o, typeof(TCore));
 		}
 
 		/// <param name="fileExt">file extension, including the leading period and in lowercase</param>
