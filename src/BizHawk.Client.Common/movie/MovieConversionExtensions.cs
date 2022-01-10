@@ -179,6 +179,7 @@ namespace BizHawk.Client.Common
 		public static void PopulateWithDefaultHeaderValues(
 			this IMovie movie,
 			IEmulator emulator,
+			SettingsAdapter settable,
 			IGameInfo game,
 			FirmwareManager firmwareManager,
 			string author)
@@ -188,7 +189,6 @@ namespace BizHawk.Client.Common
 			movie.OriginalEmulatorVersion = VersionInfo.GetEmuVersion();
 			movie.SystemID = emulator.SystemId;
 
-			var settable = new SettingsAdapter(emulator);
 			if (settable.HasSyncSettings)
 			{
 				movie.SyncSettingsJson = ConfigService.SaveWithType(settable.GetSyncSettings());
