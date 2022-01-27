@@ -638,8 +638,5 @@ namespace BizHawk.Client.Common
 				_ => WatchDisplayType.Separator
 			};
 		}
-
-		public bool IsSplittable => Size is WatchSize.Word or WatchSize.DWord
-			&& Type is WatchDisplayType.Hex or WatchDisplayType.Binary;
 	}
 }
